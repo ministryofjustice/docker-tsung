@@ -4,7 +4,6 @@ MAINTAINER platforms@digital.justice.gov.uk
 # APT packages setup
 RUN apt-get update \
     && apt-get install -y \
-        cron \
         tsung \
         s3cmd \
         wget \

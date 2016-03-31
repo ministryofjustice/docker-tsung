@@ -28,8 +28,9 @@ The cron schedule to run the tsung job on, the default is below
 
     TSUNG_CRON_SCHEDULE="0 11 * * 2"
 
-TSUNG_S3_URL
+TSUNG_S3_BUCKET
 ~~~~~~~~~~~~~~~~~
 
-S3 url to backup the logs to
+The S3 bucket name to backup the logs to
+
 
