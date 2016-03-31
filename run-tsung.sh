@@ -22,6 +22,6 @@ mkdir -p ${log_dir}
 service ssh start
 exec ${cmd_tsung}
 if [ ! -z ${TSUNG_S3_BUCKET} ]; then
-    cmd_s3cmd="s3cmd sync ${log_dir} s3://${TSUNG_S3_BUCKET}/${config_name}
+    cmd_s3cmd="s3cmd sync ${log_dir} s3://${TSUNG_S3_BUCKET}/${config_name}/"
     exec ${cmd_s3cmd}
 fi
