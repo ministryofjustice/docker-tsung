@@ -16,12 +16,24 @@ if [ ! -f "${tsung_config}" ]; then
 fi
 
 cmd_tsung="tsung -l ${log_dir} -f ${tsung_config} start"
-
+cmd_tsung_stats="/usr/lib/tsung/bin/tsung_stats.pl"
 
 mkdir -p ${log_dir}
 service ssh start
-exec ${cmd_tsung}
+${cmd_tsung}
+
+# Generate reports 
+cwd=`pwd`
+for dir in ${log_dir}/*; do
+    if [ -d ${dir} ]; then
+        cd ${dir}
+        ${cmd_tsung_stats}
+        cd ${cwd}
+   fi
+done
+
+# Upload results to s3
 if [ ! -z ${TSUNG_S3_BUCKET} ]; then
     cmd_s3cmd="s3cmd sync ${log_dir} s3://${TSUNG_S3_BUCKET}/${config_name}/"
-    exec ${cmd_s3cmd}
+    ${cmd_s3cmd}
 fi
